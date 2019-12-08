@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "36f014da-c4d5-405f-80bb-5af3151d692a",
+		"name": "RestServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all the Cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:61539/api/cars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "61539",
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Car by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:61539/api/cars/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "61539",
+					"path": [
+						"api",
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a Car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:61539/api/cars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "61539",
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace the Car with the given Id by a new one",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:61539/api/cars/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "61539",
+					"path": [
+						"api",
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update the Color of a Car",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Color\":\"Blue\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:61539/api/cars/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "61539",
+					"path": [
+						"api",
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

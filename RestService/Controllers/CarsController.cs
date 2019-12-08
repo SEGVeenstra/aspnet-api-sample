@@ -12,7 +12,7 @@ namespace RestService.Controllers
     [Route("api/[controller]")]
     public class CarsController : Controller
     {
-        private IList<Car> cars = new List<Car>();
+        static private IList<Car> cars = new List<Car>();
 
         // GET api/cars
         [HttpGet]
@@ -47,15 +47,22 @@ namespace RestService.Controllers
 
         // POST api/cars
         [HttpPost]
-        public void Post([FromBody]CarPOST car)
+        public IActionResult Post([FromBody]CarPOST car)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             cars.Add(new Car (GenerateId(), car.Name,car.Brand,car.Color));
+            return Ok();
         }
 
         // PUT api/cars/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]CarPUT car)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var selectedCar = cars.FirstOrDefault(c => c.Id == id);
 
             if (selectedCar == null)
@@ -68,15 +75,33 @@ namespace RestService.Controllers
 
         // PUT api/cars/5
         [HttpPatch("{id}")]
-        public void Patch(int id, [FromBody]string value)
+        public IActionResult Patch(int id, [FromBody]CarPATCH car)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var selectedCar = cars.FirstOrDefault(c => c.Id == id);
+
+            if (selectedCar == null)
+                return NotFound();
+
+            cars.Remove(selectedCar);
+            cars.Add(new Car(id, selectedCar.Name, selectedCar.Brand, car.Color));
+
+            return Ok();
         }
 
         // DELETE api/cars/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var selectedCar = cars.FirstOrDefault(c => c.Id == id);
+
+            if (selectedCar == null)
+                return NotFound();
+
+            cars.Remove(selectedCar);
+            return Ok(selectedCar);
         }
 
         private int GenerateId()
