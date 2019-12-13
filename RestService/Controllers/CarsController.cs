@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestService.Models;
-using System.Collections;
 using RestService.DTOs.Cars;
 
 namespace RestService.Controllers
@@ -52,8 +49,9 @@ namespace RestService.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            cars.Add(new Car (GenerateId(), car.Name,car.Brand,car.Color));
-            return Ok();
+            var id = GenerateId();
+            cars.Add(new Car (id, car.Name,car.Brand,car.Color));
+            return Ok(id);
         }
 
         // PUT api/cars/5
@@ -73,7 +71,7 @@ namespace RestService.Controllers
             return NoContent();
         }
 
-        // PUT api/cars/5
+        // PATCH api/cars/5
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, [FromBody]CarPATCH car)
         {
